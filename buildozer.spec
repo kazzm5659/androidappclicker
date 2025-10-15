@@ -39,6 +39,8 @@ version = 0.1
 # comma separated e.g. requirements = sqlite3,kivy
 requirements = python3,kivy,cython
 android.sdk_path = $HOME/.buildozer/android/platform/android-sdk
+android.ndk_path = $HOME/.buildozer/android/platform/android-ndk-r25b
+android.accept_sdk_license = True
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes
