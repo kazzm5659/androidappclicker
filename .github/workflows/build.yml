@@ -2,7 +2,7 @@ name: Build Kivy APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
@@ -38,13 +38,12 @@ jobs:
 
       - name: Install Android SDK Build Tools
         run: |
-          mkdir -p $ANDROIDSDK
-          cd $ANDROIDSDK
+          mkdir -p $ANDROIDSDK/cmdline-tools
+          cd $ANDROIDSDK/cmdline-tools
           wget https://dl.google.com/android/repository/commandlinetools-linux-10406996_latest.zip
-          unzip -q commandlinetools-linux-10406996_latest.zip -d cmdline-tools
-          mkdir -p tools
-          mv cmdline-tools/cmdline-tools/* tools/
-          yes | tools/bin/sdkmanager --sdk_root=$ANDROIDSDK "platform-tools" "build-tools;34.0.0" "platforms;android-34"
+          unzip -q commandlinetools-linux-10406996_latest.zip
+          mv cmdline-tools latest
+          yes | $ANDROIDSDK/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROIDSDK "platform-tools" "build-tools;34.0.0" "platforms;android-34"
 
       - name: Install Android NDK r25b
         run: |
