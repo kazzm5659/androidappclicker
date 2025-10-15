@@ -2,7 +2,7 @@ name: Build Kivy APK
 
 on:
   push:
-    branches: [ master ]  # или main, если у тебя другая дефолтная ветка
+    branches: [ master ]  # замени на main, если у тебя дефолтная ветка main
 
 jobs:
   build:
@@ -15,7 +15,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt update
-        sudo apt install -y python3-pip zip unzip openjdk-17-jdk wget
+        sudo apt install -y python3-pip zip unzip openjdk-17-jdk wget libncurses5
         pip install cython
         pip install buildozer
 
@@ -23,6 +23,8 @@ jobs:
       run: |
         mkdir -p $HOME/.buildozer/android/platform
         cd $HOME/.buildozer/android/platform
+
+        # Скачиваем Android Command Line Tools
         wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O cmdline-tools.zip
         unzip cmdline-tools.zip
         mkdir -p android-sdk/cmdline-tools
